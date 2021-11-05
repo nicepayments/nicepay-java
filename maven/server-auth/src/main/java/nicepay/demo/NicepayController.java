@@ -23,8 +23,8 @@ public class NicepayController {
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final String CLIENT_ID = "클라이언트 키";  
-    private final String SECRET_KEY = "시크릿 키";     
+    private final String CLIENT_ID = "S2_af4543a0be4d49a98122e01ec2059a56";  
+    private final String SECRET_KEY = "9eb85607103646da9f9c02b128f2e5ee";     
 
     @RequestMapping(value = "/")
     public String indexDemo(Model model){
@@ -55,7 +55,7 @@ public class NicepayController {
         HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(AuthenticationMap), headers);
 
         ResponseEntity<JsonNode> responseEntity = restTemplate.postForEntity(
-            "https://api.nicepay.co.kr/v1/payments/" + tid, request, JsonNode.class);
+            "https://sandbox-api.nicepay.co.kr/v1/payments/" + tid, request, JsonNode.class);
 
         JsonNode responseNode = responseEntity.getBody();
         String resultCode = responseNode.get("resultCode").asText();
@@ -90,7 +90,7 @@ public class NicepayController {
         HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(AuthenticationMap), headers);
 
         ResponseEntity<JsonNode> responseEntity = restTemplate.postForEntity(
-            "https://api.nicepay.co.kr/v1/payments/"+ tid +"/cancel", request, JsonNode.class);
+            "https://sandbox-api.nicepay.co.kr/v1/payments/"+ tid +"/cancel", request, JsonNode.class);
 
         JsonNode responseNode = responseEntity.getBody();
         String resultCode = responseNode.get("resultCode").asText();
